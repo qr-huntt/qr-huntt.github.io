@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QR Hunt</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2",
+        "canvas-confetti": "https://esm.sh/canvas-confetti@1.9.2"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="logo-container">
+                <img src="qrhunt.png" alt="QR Hunt Logo" class="logo">
+                <h1>QR Hunt</h1>
+            </div>
+            <p class="description" data-i18n="description">Find the QR code, scan, and drop it in another location for others to find!</p>
+            
+            <div class="controls">
+                <select id="sort-filter">
+                    <option value="desc" data-i18n="sort_newest">Newest first</option>
+                    <option value="asc" data-i18n="sort_oldest">Oldest first</option>
+                </select>
+            </div>
+        </header>
+
+        <main id="leaderboard-container">
+            <h2 class="board-title"><span data-i18n="board_title">All QR code finders</span> <span id="finder-count"></span></h2>
+            <div class="board-block">
+                <div class="table-header">
+                    <span data-i18n="col_nickname">NICKNAME</span>
+                    <span data-i18n="col_date">DATE</span>
+                </div>
+                <ul id="leaderboard">
+                    <!-- List items will be injected here -->
+                    <div class="loader" data-i18n="loading">Loading finders...</div>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Overlay for the "Found it!" popup -->
+        <div id="popup-overlay" class="overlay hidden">
+            <div class="popup">
+                <div class="popup-content">
+                    <h2 data-i18n="popup_title">🎉 Congrats!</h2>
+                    <p data-i18n="popup_msg">You found the hidden QR code!</p>
+                    <p class="instruction" data-i18n="popup_instr">Enter your nickname to join the board of finders, then drop the QR somewhere else for the next person to find!</p>
+                    <input type="text" id="nickname-input" data-i18n-placeholder="placeholder" placeholder="Your Nickname" maxlength="20">
+                    <button id="submit-nickname" data-i18n="button_claim">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
